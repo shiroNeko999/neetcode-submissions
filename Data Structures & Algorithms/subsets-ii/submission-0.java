@@ -1,0 +1,22 @@
+class Solution {
+    List<List<Integer>> res = new ArrayList<>();
+    public List<List<Integer>> subsetsWithDup(int[] nums) {
+        List<Integer> sub = new ArrayList<>();
+        Arrays.sort(nums);
+        backtrack(nums, 0 , sub);
+        return res;
+    }
+
+    public void backtrack(int[]nums , int start , List<Integer> sub){
+        //add value of sub to results
+        res.add(new ArrayList<>(sub));
+        for( int i = start ; i< nums.length ;i++){
+            if(i>start && nums[i]==nums[i-1]){// skip for same level
+                continue;
+            }
+            sub.add(nums[i]);
+            backtrack(nums, i+1, sub );
+            sub.remove(sub.size()-1);
+        }
+    }
+}
